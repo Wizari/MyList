@@ -1,21 +1,22 @@
 package com.gmail.wizaripost;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MyLinkedList implements List<Integer> {
+
+    Integer size = 0;
+    Node first = null;
+    Node last = null;
 
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return first == null;
     }
 
     @Override
@@ -40,7 +41,20 @@ public class MyLinkedList implements List<Integer> {
 
     @Override
     public boolean add(Integer integer) {
-        return false;
+        Node node = new Node(integer, null);
+        if (last != null) {
+            last.next = node;
+            size++;
+            last = node;
+        } else if (first != null) {
+            first.next = node;
+            size++;
+            last = node;
+        } else  {
+            first = node;
+            size++;
+        }
+        return true;
     }
 
     @Override
@@ -80,7 +94,23 @@ public class MyLinkedList implements List<Integer> {
 
     @Override
     public Integer get(int index) {
-        return 0;
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        if (index == 0) {
+            return this.first.item;
+        }
+        if (index == size){
+            return this.last.item;
+        }
+        Node node = this.first.next;
+        for (int i = 0; i < size; i++) {
+            if (index == i + 1) {
+                return node.item;
+            }
+            node = node.next;
+        }
+        throw new IllegalStateException("Index: " + index);
     }
 
     @Override
@@ -123,4 +153,16 @@ public class MyLinkedList implements List<Integer> {
 //        return List.of();
         return null;
     }
+
+    private static class Node {
+        Integer item;
+        Node next;
+
+        Node(Integer item, Node next) {
+            this.item = item;
+            this.next = next;
+        }
+    }
+
+
 }
