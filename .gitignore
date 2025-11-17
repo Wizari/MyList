@@ -4,10 +4,10 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-src/test/java/com/gmail/wizaripost/.idea/modules.xml
-src/test/java/com/gmail/wizaripost/.idea/jarRepositories.xml
-src/test/java/com/gmail/wizaripost/.idea/compiler.xml
-src/test/java/com/gmail/wizaripost/.idea/libraries/
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
 *.iws
 *.iml
 *.ipr
@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/test/java/com/gmail/wizaripost/.idea/
+/.idea/
