@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -127,6 +126,53 @@ class MyLinkedListTest {
         assertEquals(300, sum);
     }
 
+    @Test
+    @DisplayName("add(index, element)")
+    void testAddForIndex() {
+        list.add(0, 0);
+        list.add(1, 11);
+        list.add(2, 22);
+
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+//        System.out.println(list.get(3));
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        assertEquals(0, list.get(0));
+        assertEquals(11, list.get(1));
+        assertEquals(22, list.get(2));
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(3));
+        list.add(1, 33);
+        assertEquals(0, list.get(0));
+        assertEquals(33, list.get(1));
+        assertEquals(11, list.get(2));
+        assertEquals(22, list.get(3));
+        assertEquals(22, list.get(4));
+    }
+
+
+
+
+
+
+//    @Test
+//    @DisplayName("GetNode()")
+//    void GetNode() {
+//        list.add(0);
+//        list.add(11);
+//        list.add(2222);
+//        list.add(33);
+//
+//        System.out.println(list.getNode(0));
+//        System.out.println(list.getNode(1));
+//        System.out.println(list.getNode(2));
+//        System.out.println(list.getNode(3));
+//
+//    }
+
     // Добавь другие тесты по мере реализации методов:
     // - add(index, element)
     // - set(index, element)
@@ -134,4 +180,10 @@ class MyLinkedListTest {
     // - contains()
     // - equals(), hashCode()
     // - конструктор с коллекцией
+
+
+//        System.out.println(list.getNode(0));
+//        System.out.println(list.getNode(1));
+//        System.out.println(list.getNode(2));
+//        System.out.println(list.getNode(3));
 }

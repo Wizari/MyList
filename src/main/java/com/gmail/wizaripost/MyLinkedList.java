@@ -4,9 +4,9 @@ import java.util.*;
 
 public class MyLinkedList implements List<Integer> {
 
-    Integer size = 0;
-    Node first = null;
-    Node last = null;
+    private Integer size = 0;
+    private Node first = null;
+    private Node last = null;
 
 
     @Override
@@ -46,11 +46,12 @@ public class MyLinkedList implements List<Integer> {
             last.next = node;
             size++;
             last = node;
+            return true;
         } else if (first != null) {
             first.next = node;
             size++;
             last = node;
-        } else  {
+        } else {
             first = node;
             size++;
         }
@@ -89,18 +90,19 @@ public class MyLinkedList implements List<Integer> {
 
     @Override
     public void clear() {
-
+        first = null;
+        size = 0;
     }
 
     @Override
     public Integer get(int index) {
-        if (index > size || index < 0) {
+        if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
         if (index == 0) {
             return this.first.item;
         }
-        if (index == size){
+        if (index == size - 1) {
             return this.last.item;
         }
         Node node = this.first.next;
@@ -118,9 +120,81 @@ public class MyLinkedList implements List<Integer> {
         return 0;
     }
 
+    private Node getNode(Integer id) {
+        if (id >= size || id < 0) {
+            throw new IndexOutOfBoundsException("Index: " + id + ", Size: " + size);
+        }
+        if (id == 0) {
+            System.out.println("0 id " + id);
+
+            return this.first;
+        }
+        if (id == size - 1) {
+            System.out.println("1 id " + id);
+            return this.last;
+        }
+        Node node = this.first.next;
+        for (int i = 0; i < size; i++) {
+            if (id == i + 1) {
+                System.out.println("3 id " + id);
+                return node.next;
+            }
+            node = node.next;
+        }
+        throw new IllegalStateException("Index: " + id);
+    }
+
     @Override
     public void add(int index, Integer element) {
+        System.out.println("**: " + index + " - " + size);
 
+        Node node = new Node(element, null);
+        if (index == 0) {
+            if (this.first != null) {
+                node.next = this.first;
+                if (last == null) {
+                    last = first;
+                }
+                this.first = node;
+            } else {
+                this.first = node;
+            }
+            size++;
+            return;
+        }
+//        if (last == null && index == 1) {
+//            first.next = node;
+//            last = node;
+//            size++;
+//        }
+
+        if (index == size - 1 || index == 1) {
+
+            if (this.last != null) {
+                Node updateNext = getNode(index - 1);
+                updateNext.next = node;
+                node.next = this.last;
+                System.out.println("index: " + index + " - " + size);
+            } else {
+                this.first.next = node;
+                this.last = node;
+            }
+            size++;
+            return;
+        }
+        if (index == size) {
+            System.out.println("qqq: " + index + " - " + size);
+            Node nodeBefore = getNode(index - 1);
+            node.next = nodeBefore.next;
+            nodeBefore.next = node;
+            size++;
+            return;
+        }
+        System.out.println("aaa: " + index + " - " + size);
+        Node nodeBefore = getNode(index - 1);
+        node.next = nodeBefore.next;
+        nodeBefore.next = node;
+        size++;
     }
 
     @Override
