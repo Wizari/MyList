@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -132,58 +133,99 @@ class MyLinkedListTest {
         list.add(0, 0);
         list.add(1, 11);
         list.add(2, 22);
+        list.add(3, 33);
+        list.add(4, 44);
+
+        assertEquals(0, list.get(0));
+        assertEquals(11, list.get(1));
+        assertEquals(22, list.get(2));
+        assertEquals(44, list.get(4));
+    }
+
+    @Test
+    @DisplayName("add(index, element) v2")
+    void testAddForIndexV2() {
+        list.add(0, 0);
+        list.add(1, 11);
+        list.add(2, 22);
+        list.add(3, 33);
+
+        list.add(1, 44);
+
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+        System.out.println(list.get(3));
+        System.out.println(list.get(4));
+
+        assertEquals(0, list.get(0));
+        assertEquals(44, list.get(1));
+        assertEquals(11, list.get(2));
+    }
+
+    @Test
+    @DisplayName("add(index, element) v3")
+    void testAddForIndexV3() {
+        list.add(0, 0);
+        list.add(1, 11);
+        list.add(2, 22);
+        list.add(3, 33);
+        list.add(4, 444);
+
+        list.add(3, 44);
+
+        System.out.println(list.get(0));
+        System.out.println(list.get(1));
+        System.out.println(list.get(2));
+        System.out.println(list.get(3));
+        System.out.println(list.get(4));
+        System.out.println(list.get(5));
+
+        assertEquals(11, list.get(1));
+        assertEquals(44, list.get(3));
+
+    }
+
+    @Test
+    @DisplayName("add(index, element) v4")
+    void testAddForIndexV4() {
+        list.add(0, 0);
+        list.add(0, 11);
+        list.add(1, 22);
+        list.add(2, 33);
+        list.add(3, 444);
+
+        assertEquals(11, list.get(0));
+        assertEquals(0, list.get(4));
+    }
+
+    @Test
+    @DisplayName("IndexOutOfBoundsException")
+    void testIndexOutOfBoundsException4() {
+        assertThrows(IndexOutOfBoundsException.class, () -> list.get(3));
+    }
+
+    @Test
+    @DisplayName("List")
+    void List() {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(0, 0);
+        list.add(1, 11);
+        list.add(2, 22);
 
         System.out.println(list.get(0));
         System.out.println(list.get(1));
         System.out.println(list.get(2));
 //        System.out.println(list.get(3));
-        System.out.println();
-        System.out.println();
-        System.out.println();
 
         assertEquals(0, list.get(0));
         assertEquals(11, list.get(1));
         assertEquals(22, list.get(2));
         assertThrows(IndexOutOfBoundsException.class, () -> list.get(3));
-        list.add(1, 33);
-        assertEquals(0, list.get(0));
-        assertEquals(33, list.get(1));
+        list.add(0, 33);
+        assertEquals(33, list.get(0));
+        assertEquals(0, list.get(1));
         assertEquals(11, list.get(2));
         assertEquals(22, list.get(3));
-        assertEquals(22, list.get(4));
     }
-
-
-
-
-
-
-//    @Test
-//    @DisplayName("GetNode()")
-//    void GetNode() {
-//        list.add(0);
-//        list.add(11);
-//        list.add(2222);
-//        list.add(33);
-//
-//        System.out.println(list.getNode(0));
-//        System.out.println(list.getNode(1));
-//        System.out.println(list.getNode(2));
-//        System.out.println(list.getNode(3));
-//
-//    }
-
-    // Добавь другие тесты по мере реализации методов:
-    // - add(index, element)
-    // - set(index, element)
-    // - indexOf()
-    // - contains()
-    // - equals(), hashCode()
-    // - конструктор с коллекцией
-
-
-//        System.out.println(list.getNode(0));
-//        System.out.println(list.getNode(1));
-//        System.out.println(list.getNode(2));
-//        System.out.println(list.getNode(3));
 }

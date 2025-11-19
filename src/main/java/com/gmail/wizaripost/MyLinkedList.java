@@ -49,12 +49,11 @@ public class MyLinkedList implements List<Integer> {
             return true;
         } else if (first != null) {
             first.next = node;
-            size++;
             last = node;
         } else {
             first = node;
-            size++;
         }
+        size++;
         return true;
     }
 
@@ -121,23 +120,19 @@ public class MyLinkedList implements List<Integer> {
     }
 
     private Node getNode(Integer id) {
-        if (id >= size || id < 0) {
+        if (id > size || id < 0) {
             throw new IndexOutOfBoundsException("Index: " + id + ", Size: " + size);
         }
         if (id == 0) {
-            System.out.println("0 id " + id);
-
             return this.first;
         }
-        if (id == size - 1) {
-            System.out.println("1 id " + id);
+        if (id.equals(size)) {
             return this.last;
         }
-        Node node = this.first.next;
+        Node node = this.first;
         for (int i = 0; i < size; i++) {
-            if (id == i + 1) {
-                System.out.println("3 id " + id);
-                return node.next;
+            if (id == i) {
+                return node;
             }
             node = node.next;
         }
@@ -146,8 +141,6 @@ public class MyLinkedList implements List<Integer> {
 
     @Override
     public void add(int index, Integer element) {
-        System.out.println("**: " + index + " - " + size);
-
         Node node = new Node(element, null);
         if (index == 0) {
             if (this.first != null) {
@@ -162,19 +155,11 @@ public class MyLinkedList implements List<Integer> {
             size++;
             return;
         }
-//        if (last == null && index == 1) {
-//            first.next = node;
-//            last = node;
-//            size++;
-//        }
-
-        if (index == size - 1 || index == 1) {
-
+        if (index == size - 1 || (index == size - 1 && index == 1)) {
             if (this.last != null) {
-                Node updateNext = getNode(index - 1);
-                updateNext.next = node;
-                node.next = this.last;
-                System.out.println("index: " + index + " - " + size);
+                Node nodeBefore = getNode(index - 1);
+                nodeBefore.next = node;
+                node.next = last;
             } else {
                 this.first.next = node;
                 this.last = node;
@@ -183,15 +168,15 @@ public class MyLinkedList implements List<Integer> {
             return;
         }
         if (index == size) {
-            System.out.println("qqq: " + index + " - " + size);
-            Node nodeBefore = getNode(index - 1);
-            node.next = nodeBefore.next;
-            nodeBefore.next = node;
-            size++;
+            this.add(element);
             return;
         }
-        System.out.println("aaa: " + index + " - " + size);
-        Node nodeBefore = getNode(index - 1);
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+
+        Node nodeBefore = getNode(index -1 );
+        System.out.println("nodeB"+nodeBefore.item);
         node.next = nodeBefore.next;
         nodeBefore.next = node;
         size++;
