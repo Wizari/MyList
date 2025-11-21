@@ -56,19 +56,6 @@ class MyLinkedListTest {
     }
 
     @Test
-    @DisplayName("Remove удаляет элемент и возвращает true")
-    void testRemoveByIndex() {
-        list.add(10);
-        list.add(20);
-        list.add(30);
-
-        Integer removed = list.remove(1); // удаляем 20
-        assertEquals(20, removed);
-        assertEquals(2, list.size());
-        assertEquals(30, list.get(1));
-    }
-
-    @Test
     @DisplayName("Remove по значению работает корректно")
     void testRemoveByValue() {
         list.add(10);
@@ -216,7 +203,6 @@ class MyLinkedListTest {
         System.out.println(list.get(0));
         System.out.println(list.get(1));
         System.out.println(list.get(2));
-//        System.out.println(list.get(3));
 
         assertEquals(0, list.get(0));
         assertEquals(11, list.get(1));
@@ -228,4 +214,34 @@ class MyLinkedListTest {
         assertEquals(11, list.get(2));
         assertEquals(22, list.get(3));
     }
+    @Test
+    @DisplayName("Remove удаляет элемент и возвращает true")
+    void testRemoveByIndex() {
+        list.add(10);
+        list.add(20);
+        list.add(30);
+
+        Integer removed = list.remove(1); // удаляем 20
+        assertEquals(20, removed);
+        assertEquals(2, list.size());
+        assertEquals(30, list.get(1));
+    }
+
+    @Test
+    @DisplayName("Remove удаляет элемент и возвращает true")
+    void LISTTestRemoveByIndex() {
+        LinkedList<Integer> list = new LinkedList<>();
+
+        list.add(10);
+        list.add(20);
+        list.add(30);
+
+        Integer removed = list.remove(1); // удаляем 20
+        assertEquals(20, removed);
+        assertEquals(2, list.size());
+        assertEquals(30, list.get(1));
+    }
 }
+
+
+//mvn clean deploy -Dmaven.test.skip=true

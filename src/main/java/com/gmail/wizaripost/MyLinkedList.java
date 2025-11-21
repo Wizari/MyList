@@ -184,6 +184,10 @@ public class MyLinkedList implements List<Integer> {
 
     @Override
     public Integer remove(int index) {
+//        if (index == size || index < 0) {
+//            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+//        }
+
         return 0;
     }
 
